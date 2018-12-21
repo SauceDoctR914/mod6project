@@ -1,28 +1,58 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 class App extends Component {
+  state = {
+    errors: false,
+    auth: { email: "", password: "" }
+  };
+
+  componentDidMount() {
+    const URL = "http://localhost:3002/api/v1/users";
+    if (localStorage.getItem("jwt")) {
+      fetch(URL, {
+        method: "GET",
+        headers: {
+          Authorization: localStorage.getItem("jwt")
+        }
+      })
+        .then(res => res.json())
+        .then(user => {
+          if (!user.error) {
+            this.props.currentUser;
+          } else {
+            this.logout();
+          }
+        });
+    } else {
+      this.history.push("/signup");
+    }
+  }
+
+  logout = () => {
+    localStorage.removeItem("jwt");
+  };
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    return <div className="App" />;
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  if (state) {
+    return {
+      jwt: state.currentUser.jwt
+    };
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return { currentUser: user => dispatch(getUser(user)) };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);
