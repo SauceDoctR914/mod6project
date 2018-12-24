@@ -1,24 +1,22 @@
 import React, { Component } from "react";
-
+import { withRouter } from "react-router-dom";
 class SignUp extends Component {
-
-state = {
-  user: {
-    email: "",
-    password: ""
-  }
-}
-
-  handleChange = (e) => {
-      const newUser = {
-        ...this.state.user,
-        [e.target.name]: e.target.value
-      }
-      this.setState({
-        user: newUser
-      })
+  state = {
+    user: {
+      email: "",
+      password: ""
     }
+  };
 
+  handleChange = e => {
+    const newUser = {
+      ...this.state.user,
+      [e.target.name]: e.target.value
+    };
+    this.setState({
+      user: newUser
+    });
+  };
 
   handleSubmit = (e, obj) => {
     e.preventDefault();
@@ -27,28 +25,28 @@ state = {
   };
   componentDidMount() {}
 
-  signup = (email, username, displayname, password, pCon) => {
-   const URL = 'http://localhost:3000/users'
-   if (password === pCon){
-     fetch(URL, {
-       method: "POST",
-       headers: {
-         "Content-Type": "application/json",
-         Accept: "application/json"
-       },
-       body: JSON.stringify({
-         user: {
-           email: email,
-           password: password
-         }
-       })
-     })
-     .then(res => res.json())
-     .then(this.props.history.push('/login'))
-   } else {
-     alert("not same password bro") // render something less anooying than alert
-   }
-
+  signup = (email, password, tester) => {
+    const URL = "http://localhost:3002/api/v1/users";
+    if (password) {
+      fetch(URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          user: {
+            email: email,
+            password: password
+          }
+        })
+      })
+        .then(res => res.json())
+        .then(this.props.history.push("/login"));
+    } else {
+      alert("not same password bro"); // render something less anooying than alert
+    }
+  };
 
   logout = () => {
     localStorage.removeItem("jwt");
@@ -66,7 +64,7 @@ state = {
             name="email"
             id="email"
             type="text"
-            value={this.state.auth.email}
+            value={this.state.user.email}
           />
           <br />
           <br />
@@ -77,7 +75,7 @@ state = {
             name="password"
             id="password"
             type="text"
-            value={this.state.auth.password}
+            value={this.state.user.password}
           />
           <br />
           <input type="submit" name="Submit" />
@@ -88,4 +86,4 @@ state = {
   }
 }
 
-export default SignUp;
+export default withRouter(SignUp);

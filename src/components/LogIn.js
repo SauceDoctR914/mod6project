@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { withRouter } from "react-router-dom";
 class LogIn extends Component {
   state = {
     errors: false,
@@ -13,7 +13,7 @@ class LogIn extends Component {
   };
   handleSubmit = (e, obj) => {
     e.preventDefault();
-    console.log("yo", e.target);
+    console.log("yo", e.target, obj);
     this.login(obj);
   };
 
@@ -37,9 +37,12 @@ class LogIn extends Component {
         if (user.error) {
           this.setState({ errors: true });
         } else {
+          console.log(user)
           localStorage.setItem("jwt", user.jwt);
-          // this.props.history.push("/YourNoteBook");
+          if (user.jwt){
+            (this.props.history.push(`/${this.state.auth.email}/homepage`));
         }
+      }
       });
   };
   render() {
@@ -76,4 +79,4 @@ class LogIn extends Component {
   }
 }
 
-export default LogIn;
+export default withRouter(LogIn);
