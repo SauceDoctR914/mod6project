@@ -6,7 +6,8 @@ class NoteBook extends Component {
   render() {
     return (
       <div>
-        <Note />
+        {NoteBook.title}
+        <NewNote />
       </div>
     );
   }

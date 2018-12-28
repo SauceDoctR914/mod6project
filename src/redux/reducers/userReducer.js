@@ -16,8 +16,8 @@ const userReducer = (state = initialState, action) => {
     case "GET_USERS": {
       return { ...state, users: action.payload };
     }
-    case "GET_PROJECTS": {
-      return { ...state };
+    case "GET_NOTEBOOKS": {
+      return { ...state, notebooks: action.notebooks };
     }
     default:
       return state;

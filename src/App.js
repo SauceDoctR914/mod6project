@@ -52,9 +52,8 @@ class App extends Component {
             render={routerProps => <LogIn {...routerProps} />}
           />
           <Route
-            exact
             path={"/:email/homepage"}
-            render={routerProps => <LogIn {...routerProps} />}
+            render={routerProps => <UserPage {...routerProps} />}
           />
         </Switch>
       </div>
