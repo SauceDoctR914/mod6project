@@ -6,6 +6,7 @@ import LogIn from "./components/LogIn";
 import UserPage from "./containers/UserPage";
 import { connect } from "react-redux";
 import { fetchNoteBooks } from "./redux/actions/actions";
+import { fetchNotes } from "./redux/actions/actions";
 class App extends Component {
   state = {
     errors: false,
@@ -29,8 +30,7 @@ class App extends Component {
             this.logout();
           }
         });
-      }
-
+    }
   }
 
   logout = () => {

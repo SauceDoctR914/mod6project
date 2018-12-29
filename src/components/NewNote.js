@@ -11,10 +11,13 @@ class NewNote extends Component {
     }
   };
 
-  handleNoteChange = () => {
+  handleNoteChange = e => {
     this.setState({
       note: { ...this.state.note, [e.target.name]: e.target.value }
     });
+  };
+  handleDateChange = event => {
+    this.setState({ created: event.target.value });
   };
 
   handleSubmit = (e, obj) => {
@@ -24,24 +27,23 @@ class NewNote extends Component {
 
   postNote = note => {
     const URL = "http://localhost:3002/api/v1/notes";
-    if (password) {
-      fetch(URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify({
-          note: {
-            title: "",
-            created: "",
-            description: "",
-            content: ""
-          }
-        })
-      }).then(res => res.json());
-    }
+    fetch(URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        note: {
+          title: "",
+          created: "",
+          description: "",
+          content: ""
+        }
+      })
+    }).then(res => res.json());
   };
+
   render() {
     return (
       <div>
@@ -57,10 +59,11 @@ class NewNote extends Component {
           />
           <br />
           <label htmlFor="created"> Date Created: </label>
-          <select
-            value={Moment().format("dddd, MMMM Do YYYY")}
-            onChange={this.handleNoteChange}
-          />
+          <select value={this.state.created} onChange={this.handleDateChange}>
+            <option value={this.state.created}>
+              {Moment().format("MMMM Do, YYYY")}
+            </option>
+          </select>
           <br />
           <label htmlFor="description"> Description: </label>
           <br />

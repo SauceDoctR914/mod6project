@@ -5,7 +5,8 @@ const initialState = {
   },
   users: [],
   notebooks: [],
-  newNotebook: {}
+  newNotebook: {},
+  notes: []
 };
 
 const userReducer = (state = initialState, action) => {
@@ -18,6 +19,9 @@ const userReducer = (state = initialState, action) => {
     }
     case "GET_NOTEBOOKS": {
       return { ...state, notebooks: action.notebooks };
+    }
+    case "GET_NOTES": {
+      return { ...state, notes: action.notes };
     }
     default:
       return state;

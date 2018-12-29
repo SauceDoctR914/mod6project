@@ -18,3 +18,13 @@ export const fetchNoteBooks = () => {
       .catch(console.error);
   };
 };
+
+export const fetchNotes = () => {
+  return dispatch => {
+    return fetch("http://localhost:3002/api/v1/notes")
+      .then(res => res.json())
+      .then(responseObj => Object.values(responseObj))
+      .then(notes => dispatch({ type: "GET_NOTES", notes }))
+      .catch(console.error);
+  };
+};
