@@ -6,11 +6,11 @@ import { fetchNoteBooks } from "../redux/actions/actions";
 class UserPage extends Component {
   componentDidMount() {
     this.props.fetchNoteBooks();
-    console.log("hey", this.props);
   }
 
   myNoteBooks = () => {
     if (this.props.notebooks.length > 0) {
+      // console.log(this.props.notebooks, "heyo");
       return this.props.notebooks.map(notebook => {
         return <NoteBook key={notebook.id} notebook={notebook} />;
       });

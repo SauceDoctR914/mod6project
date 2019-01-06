@@ -1,52 +1,44 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Moment from "moment";
-class NewNote extends Component {
+class EditNote extends Component {
   state = {
     note: {
       title: "",
       created: "",
       description: "",
-      content: "",
-      notebook_id: ""
+      content: ""
     }
   };
 
   handleNoteChange = e => {
-    const newNote = { ...this.state.note, [e.target.name]: e.target.value };
-    this.setState({ note: newNote });
+    this.setState({
+      note: { ...this.state.note, [e.target.name]: e.target.value }
+    });
   };
-
-  // handleDateChange = event => {
-  //   this.setState({ created: event.target.value });
-  // };
+  handleDateChange = event => {
+    this.setState({ created: event.target.value });
+  };
 
   handleSubmit = (e, obj) => {
     e.preventDefault();
-    this.postNote(
-      this.state.note.title,
-      this.state.note.created,
-      this.state.note.description,
-      this.state.note.content
-    );
+    this.editNote(this.state.note, this.state.note.id);
   };
 
-  postNote = (title, created, description, content) => {
-    const URL = "http://localhost:3002/api/v1/notes";
+  editNote = (note, id) => {
+    const URL = `http://localhost:3002/api/v1/notes/${id}`;
     fetch(URL, {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: localStorage.getItem("jwt")
+        Accept: "application/json"
       },
       body: JSON.stringify({
         note: {
-          title: title,
-          created: created,
-          description: description,
-          content: content,
-          notebook_id: this.props.notebookId
+          title: "",
+          created: "",
+          description: "",
+          content: ""
         }
       })
     }).then(res => res.json());
@@ -56,22 +48,18 @@ class NewNote extends Component {
     return (
       <div>
         <form onSubmit={e => this.handleSubmit(e, this.state)}>
-          <label htmlFor="title"> Note Title: </label>
+          <label htmlFor="title"> NoteBook Title: </label>
           <br />
           <input
             onChange={this.handleNoteChange}
             name="title"
             id="title"
             type="text"
-            value={this.state.note.title}
+            value={""}
           />
           <br />
           <label htmlFor="created"> Date Created: </label>
-          <select
-            name="created"
-            value={this.state.created}
-            onChange={this.handleNoteChange}
-          >
+          <select value={this.state.created} onChange={this.handleDateChange}>
             <option value={this.state.created}>
               {Moment().format("MMMM Do, YYYY")}
             </option>
@@ -104,4 +92,4 @@ class NewNote extends Component {
   }
 }
 
-export default withRouter(NewNote);
+export default withRouter(EditNote);

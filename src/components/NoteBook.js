@@ -8,23 +8,26 @@ import NewNote from "./NewNote";
 class NoteBook extends Component {
   componentDidMount() {
     this.props.fetchNotes();
-    console.log("hey", this.props);
+    console.log("hey", this.props.notes);
   }
 
   mapNotes = () => {
+    console.log(this.props.notes, "guy");
     if (this.props.notes.length > 0) {
       return this.props.notes.map(note => {
-        return <Note key={note.id} note={note} />;
+        return (
+          <Note key={note.id} note={note} notebookID={this.props.notebook.id} />
+        );
       });
     } else {
-      return <div>No Notebooks</div>;
+      return <div>No Notes</div>;
     }
   };
   render() {
+    console.log(this.props.notebook.attributes.title, "workwork");
     return (
       <div>
-        {NoteBook.title}
-        <NewNote />
+        {this.props.notebook.attributes.title}
         {this.mapNotes()}
       </div>
     );

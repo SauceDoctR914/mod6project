@@ -18,10 +18,10 @@ const userReducer = (state = initialState, action) => {
       return { ...state, users: action.payload };
     }
     case "GET_NOTEBOOKS": {
-      return { ...state, notebooks: action.notebooks };
+      return { ...state, notebooks: action.notebooks.data };
     }
     case "GET_NOTES": {
-      return { ...state, notes: action.notes };
+      return { ...state, notes: action.notes.data };
     }
     default:
       return state;

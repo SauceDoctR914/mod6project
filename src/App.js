@@ -7,6 +7,7 @@ import UserPage from "./containers/UserPage";
 import { connect } from "react-redux";
 import { fetchNoteBooks } from "./redux/actions/actions";
 import { fetchNotes } from "./redux/actions/actions";
+import NoteBook from "./components/NoteBook";
 class App extends Component {
   state = {
     errors: false,
@@ -49,11 +50,17 @@ class App extends Component {
           <Route
             exact
             path="/login"
-            render={routerProps => <LogIn {...routerProps} />}
+            render={routerProps => (
+              <LogIn {...routerProps} logout={this.logout} />
+            )}
           />
           <Route
             path={"/:email/homepage"}
             render={routerProps => <UserPage {...routerProps} />}
+          />
+          <Route
+            path="/:email/homepage/notebook/:id"
+            render={routerProps => <NoteBook {...routerProps} />}
           />
         </Switch>
       </div>

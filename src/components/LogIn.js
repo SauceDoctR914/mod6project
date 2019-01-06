@@ -37,12 +37,12 @@ class LogIn extends Component {
         if (user.error) {
           this.setState({ errors: true });
         } else {
-          console.log(user)
+          console.log(user);
           localStorage.setItem("jwt", user.jwt);
-          if (user.jwt){
-            (this.props.history.push(`/${this.state.auth.email}/homepage`));
+          if (user.jwt) {
+            this.props.history.push(`/${this.state.auth.email}/homepage`);
+          }
         }
-      }
       });
   };
   render() {
@@ -74,6 +74,7 @@ class LogIn extends Component {
           <input type="submit" name="Submit" />
         </form>
         <br />
+        <button onClick={this.props.logout()}>LogOut </button>
       </div>
     );
   }

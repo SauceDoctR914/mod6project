@@ -11,9 +11,12 @@ export const getNoteBooks = notebooks => ({
 
 export const fetchNoteBooks = () => {
   return dispatch => {
-    return fetch("http://localhost:3002/api/v1/notebooks")
+    return fetch("http://localhost:3002/api/v1/notebooks", {
+      headers: {
+        Authorization: localStorage.getItem("jwt")
+      }
+    })
       .then(res => res.json())
-      .then(responseObj => Object.values(responseObj))
       .then(notebooks => dispatch({ type: "GET_NOTEBOOKS", notebooks }))
       .catch(console.error);
   };
@@ -21,10 +24,15 @@ export const fetchNoteBooks = () => {
 
 export const fetchNotes = () => {
   return dispatch => {
-    return fetch("http://localhost:3002/api/v1/notes")
+    return fetch("http://localhost:3002/api/v1/notes", {
+      headers: {
+        Authorization: localStorage.getItem("jwt")
+      }
+    })
       .then(res => res.json())
-      .then(responseObj => Object.values(responseObj))
       .then(notes => dispatch({ type: "GET_NOTES", notes }))
       .catch(console.error);
   };
 };
+
+//.then(responseObj => Object.values(responseObj))
