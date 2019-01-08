@@ -4,24 +4,19 @@ import Note from "../components/Note";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchNotes } from "../redux/actions/actions";
-import NotesContainer from "../containers/NotesContainer";
-class NoteBook extends Component {
+import NewNote from "./NewNote";
+class NoteBookContainer extends Component {
   componentDidMount() {
     this.props.fetchNotes();
     console.log("hey", this.props.notes);
   }
 
   mapNotes = () => {
-    console.log(this.props.notebook, "guy");
+    console.log(this.props.notes, "guy");
     if (this.props.notes.length > 0) {
       return this.props.notes.map(note => {
         return (
-          <Note
-            key={note.id}
-            note={note}
-            notebookID={this.props.notebook.id}
-            currentUser={this.props.user}
-          />
+          <Note key={note.id} note={note} notebookID={this.props.notebook.id} />
         );
       });
     } else {
@@ -31,18 +26,24 @@ class NoteBook extends Component {
   render() {
     return (
       <Link
-        to={`/homepage/notebook/${this.props.notebook.id}`}
+        to={`/${this.props.currentUser.email}/homepage/notebook/${
+          this.props.notebook.id
+        }`}
         style={{ textDecoration: "none" }}
       >
-        <div>{this.props.notebook.attributes.title}</div>
+        <div>
+          {this.props.notebook.attributes.title}
+          {"fuck"}
+        </div>
       </Link>
     );
   }
 }
+
 const mapStateToProps = state => {
   if (state) {
     return {
-      currentUser: state.currentUser,
+      user: state.currentUser,
       jwt: state.currentUser.jwt,
       notes: state.notes
     };
@@ -57,5 +58,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(NoteBook)
+  )(NoteBookContainer)
 );

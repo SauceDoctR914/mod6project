@@ -8,6 +8,10 @@ import { connect } from "react-redux";
 import { fetchNoteBooks } from "./redux/actions/actions";
 import { fetchNotes } from "./redux/actions/actions";
 import NoteBook from "./components/NoteBook";
+import NewNote from "./components/NewNote";
+import Note from "./components/Note";
+import NotesContainer from "./containers/NotesContainer";
+import EditNote from "./components/EditNote";
 class App extends Component {
   state = {
     errors: false,
@@ -59,8 +63,16 @@ class App extends Component {
             render={routerProps => <UserPage {...routerProps} />}
           />
           <Route
-            path="/:email/homepage/notebook/:id"
-            render={routerProps => <NoteBook {...routerProps} />}
+            path="/homepage/notebook/:id"
+            render={routerProps => <NotesContainer {...routerProps} />}
+          />
+          <Route
+            path="/:email/homepage/notes/:id"
+            render={routerProps => <Note {...routerProps} />}
+          />
+          <Route
+            path="/homepage/notes/:id/editnote"
+            render={routerProps => <EditNote {...routerProps} />}
           />
         </Switch>
       </div>

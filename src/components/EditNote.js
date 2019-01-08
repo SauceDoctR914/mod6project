@@ -1,13 +1,23 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { fetchNotes } from "../redux/actions/actions";
 import Moment from "moment";
-class EditNote extends Component {
+class EditNote extends React.Component {
+  componentDidMount() {
+    const { note, id } = this.props.location.state;
+  }
+
+  note = this.props.location.state.note;
+  id = this.props.location.state.id;
+
   state = {
     note: {
-      title: "",
-      created: "",
-      description: "",
-      content: ""
+      id: this.id,
+      title: this.note.title,
+      created: this.note.created,
+      description: this.note.description,
+      content: this.note.content
     }
   };
 
@@ -31,7 +41,8 @@ class EditNote extends Component {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json"
+        Accept: "application/json",
+        Authorization: localStorage.getItem("jwt")
       },
       body: JSON.stringify({
         note: {
@@ -45,17 +56,19 @@ class EditNote extends Component {
   };
 
   render() {
+    console.log(this.props.location.state.note);
     return (
       <div>
         <form onSubmit={e => this.handleSubmit(e, this.state)}>
           <label htmlFor="title"> NoteBook Title: </label>
           <br />
           <input
+            placeholder={this.state.note.title}
             onChange={this.handleNoteChange}
             name="title"
             id="title"
             type="text"
-            value={""}
+            value={this.state.note.title}
           />
           <br />
           <label htmlFor="created"> Date Created: </label>
@@ -68,6 +81,7 @@ class EditNote extends Component {
           <label htmlFor="description"> Description: </label>
           <br />
           <input
+            placeholder={this.state.note.description}
             onChange={this.handleNoteChange}
             name="description"
             id="description"
@@ -78,6 +92,7 @@ class EditNote extends Component {
           <label htmlFor="content">Content:</label>
           <br />
           <textarea
+            placeholder={this.state.note.content}
             onChange={this.handleNoteChange}
             name="content"
             id="content"

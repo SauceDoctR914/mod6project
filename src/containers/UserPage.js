@@ -10,7 +10,6 @@ class UserPage extends Component {
 
   myNoteBooks = () => {
     if (this.props.notebooks.length > 0) {
-      // console.log(this.props.notebooks, "heyo");
       return this.props.notebooks.map(notebook => {
         return <NoteBook key={notebook.id} notebook={notebook} />;
       });
@@ -18,6 +17,10 @@ class UserPage extends Component {
       return <div>No Notebooks</div>;
     }
   };
+
+  //Need to figure out how to display the titles of the notebooks, then when you click one notebook, it brings you to that notebook page with all of the notes.
+  // also, make it so that the edit note looks very similar to the note itself
+  // you click to edit a note, then click to post a note.
 
   render() {
     return <div>{this.myNoteBooks()}</div>;
