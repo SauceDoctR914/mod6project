@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import EditNote from "./EditNote";
 class Note extends Component {
   render() {
-    console.log(this.props.note.id, "id missing");
     return (
       <React.Fragment>
         <Link

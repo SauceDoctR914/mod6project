@@ -5,13 +5,17 @@ import { fetchNotes } from "../redux/actions/actions";
 import Moment from "moment";
 class EditNote extends React.Component {
   componentDidMount() {
-    const { note, id } = this.props.location.state;
+    const { note } = this.props.location.state;
   }
 
-  note = this.props.location.state.note;
+  note = this.props.location.state.note.attributes;
   id = this.props.location.state.id;
+  notebookID = parseInt(
+    this.props.location.state.note.relationships.notebook.data.id
+  );
 
   state = {
+    errors: false,
     note: {
       id: this.id,
       title: this.note.title,
@@ -52,11 +56,18 @@ class EditNote extends React.Component {
           content: ""
         }
       })
-    }).then(res => res.json());
+    })
+      .then(res => res.json())
+      .then(note => {
+        if (note.error) {
+          this.setState({ errors: true });
+        } else {
+          this.props.history.push(`/homepage/notebook/${this.notebookID}`);
+        }
+      });
   };
-
   render() {
-    console.log(this.props.location.state.note);
+    console.log(this.props.location.state.note, "gavin");
     return (
       <div>
         <form onSubmit={e => this.handleSubmit(e, this.state)}>
