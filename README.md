@@ -1,29 +1,34 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Notiz
+
+Notiz is a note taking app and note organization app. Users signup and then login to bring them to their notebooks page. They can then create a new notebook, after creating a notebook they can click the notebook link to display that particular notebook's page. Once there, they can create a new note which is initialized with a title, the date created, a brief description of the note and the note content. After a note is created, the user may edit that note, delete the note or even translate that note into over 100 different languages!
+
+
 
 ## Available Scripts
 
-In the project directory, you can run:
+Backend built with Ruby on Rails API using Postgres. Endpoints for users, user tokens, notebooks, and notes.
 
-### `npm start`
+Frontend built with React.Js and Redux for state management. User Interface designed with custom CSS styling.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Ruby Knock Gem on the backend and bcrypt on the frontend for JWT Authentication. Google Cloud Translation Api for translating notes into foreign languages. Notebooks and notes stored on the backend, with the date created for notes formatted using Moment.js. Multi-page and dynamic links created using React Router and WithRouter.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Backend
+Run the rails API from https://github.com/SauceDoctR914/mod6project-Backend-api/ on port 3002 with
 
-### `npm test`
+bundle install
+rails db:create
+rails db:migrate
+rails s -p 3002
+Frontend
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To install frontend dependencies run
 
-### `npm run build`
+npm install
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To open in browser run
+npm start
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Usage Example
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
