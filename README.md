@@ -37,6 +37,8 @@ After creating a notebook a user can click the notebook link to display that par
 
 <img width="1133" alt="screen shot 2019-02-18 at 12 04 00 pm" src="https://user-images.githubusercontent.com/32119313/52966441-50b8f680-3375-11e9-95d4-ce50fc93f020.png">
 
+Here the note is translated into greek. At any time, the User may hit logout at the top left of the page and it will remove their JWT token, log them out, and return them to the login page where they may log back in or signup as different user.
+
 
 ## Contact
 Gavin Sokolof - sokolofg@gmail.com
