@@ -1,6 +1,8 @@
 ## Notiz
 
-Notiz is a note taking app and note organization app. Users signup and then login to bring them to their notebooks page. They can then create a new notebook, after creating a notebook they can click the notebook link to display that particular notebook's page. Once there, they can create a new note which is initialized with a title, the date created, a brief description of the note and the note content. After a note is created, the user may edit that note, delete the note or even translate that note into over 100 different languages!
+Notiz is a note taking app and note organization app. Users signup and then login to bring them to their notebooks page, where they can create a new notebook and then create notes within that notebook for organization. 
+
+<img width="1110" alt="screen shot 2019-02-18 at 11 43 56 am" src="https://user-images.githubusercontent.com/32119313/52965824-ba380580-3373-11e9-90de-c102a42ec42c.png">
 
 
 
@@ -21,29 +23,20 @@ rails db:migrate
 rails s -p 3002
 Frontend
 
-To install frontend dependencies run
+# To install frontend dependencies run
 
 npm install
 
-To open in browser run
+# To open in browser run
 npm start
 
-Usage Example
+## Usage Example
+<img width="1118" alt="screen shot 2019-02-18 at 11 44 13 am" src="https://user-images.githubusercontent.com/32119313/52966383-2404df00-3375-11e9-8e1a-5a595a8a962a.png">
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+After creating a notebook a user can click the notebook link to display that particular notebook's page. Once there, they can create a new note which is initialized with a title, the date created from a drop down, a brief description of the note, and the note content. After a note is created, the user may edit that note, delete the note or even translate that note into over 100 different languages!
 
-### `npm run eject`
+<img width="1133" alt="screen shot 2019-02-18 at 12 04 00 pm" src="https://user-images.githubusercontent.com/32119313/52966441-50b8f680-3375-11e9-95d4-ce50fc93f020.png">
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contact
+Gavin Sokolof - sokolofg@gmail.com
